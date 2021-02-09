@@ -1,4 +1,7 @@
 # components-props
+Exercitando criação de componentes e passagem de props
+#### link do surge: 
+http://scary-tax.surge.sh/
 
 ## Project setup
 ```
