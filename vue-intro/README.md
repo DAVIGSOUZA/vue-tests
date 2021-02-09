@@ -1,4 +1,8 @@
 # vue-intro
+Exercício do curso front end com react da Labenu.
+Aplicação adaptada ao Vue
+#### link do surge: 
+http://hard-string.surge.sh/
 
 ## Project setup
 ```
