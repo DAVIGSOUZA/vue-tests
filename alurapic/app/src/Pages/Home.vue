@@ -1,11 +1,18 @@
 <template>
-  <div class="body">
-    <h1 class="text-center">{{title}}</h1>
+  <div>
+    <h1 class="app-title">{{title}}</h1>
     <input type="search" class="filter" @input="filter = $event.target.value" placeholder="pesquisar">
     <ul class="list">
       <li class="list-item" v-for="foto in filterPics" :key="foto.id">
         <Card :title="foto.titulo">
           <ResponsiveImg :url="foto.url" :title="foto.titulo"/>
+          <Button 
+            type="button" 
+            name="x" 
+            @btnFunction="remove(foto)"
+            :confirmation='true'
+            btnStyle="danger"
+          />
         </Card>
       </li>
     </ul>
@@ -15,11 +22,13 @@
 <script>
 import Card from "../components/Card"
 import ResponsiveImg from "../components/ResponsiveImg"
+import Button from "../components/Button";
 
 export default {
   components: {
     Card,
-    ResponsiveImg
+    ResponsiveImg,
+    Button
   },
   data() {
     return {
@@ -42,27 +51,33 @@ export default {
         return this.fotos
       }
     }
+  },
+  methods: {
+    remove(picture) {
+      alert('foto removida' + picture.titulo)
+    }
   }
 }
 </script>
 
 <style lang="scss">
-  .body {
-    font-family: Helvetica, sans-serif;
-    width: 96vw;
-    margin: 0 auto;
-  }
-  .text-center {
+  .app-title {
     text-align: center;
+    margin: 32px 0;
   }
   .list {
+    display: block;
+    width: 80vw;
     list-style: none;
+    margin: 0 auto;
   }
   .list .list-item {
     display: inline-block;
   }
   .filter {
     display: block;
-    width: 100%;
+    margin: 16px auto;
+    height: 24px;
+    width: 80vw;
   }
 </style>

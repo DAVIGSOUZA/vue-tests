@@ -33,18 +33,22 @@ export default {
     vertical-align: top;
     text-align: center;
   }
-  .card .card-title {
+  .card-title {
     text-align: center;
     border: solid 2px;
     background-color: lightblue;
-    margin: 0 0 15px 0;
-    padding: 10px; 
+    margin: 0;
+    font-size: 1em;
+    padding: 4px; 
     text-transform: uppercase;
   }
+  /* .card-img-container {
+    height: 240px;
+  } */
   .card-fade-enter, .card-fade-leave-active{
     opacity: 0;
   }
   .card-fade-enter-active, .card-fade-leave-active{
-    transition: 0.25s;
+    transition: .25s;
   }
 </style>
