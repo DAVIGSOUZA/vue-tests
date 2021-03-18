@@ -5,7 +5,11 @@
     <ul class="list">
       <li class="list-item" v-for="foto in filterPics" :key="foto.id">
         <Card :title="foto.titulo">
-          <ResponsiveImg :url="foto.url" :title="foto.titulo"/>
+          <ResponsiveImg 
+            v-transform:scale.animate='1.2' 
+            :url="foto.url" 
+            :title="foto.titulo"
+          />
           <Button 
             type="button" 
             name="x" 
