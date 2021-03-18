@@ -42,9 +42,9 @@ export default {
     padding: 4px; 
     text-transform: uppercase;
   }
-  /* .card-img-container {
-    height: 240px;
-  } */
+  .card-img-container {
+    overflow: hidden;
+  }
   .card-fade-enter, .card-fade-leave-active{
     opacity: 0;
   }
