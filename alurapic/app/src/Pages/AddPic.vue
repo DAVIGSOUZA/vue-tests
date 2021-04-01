@@ -2,45 +2,51 @@
     <div>
         <h1 class="text-center">Adicionar Fotos</h1>
         <h2 class="text-center">Cadastro</h2>
-        <form @submit.prevent="addPicture()">
-            <div class="control text-center">
-                <label for="title">Titulo</label>
-                <input 
-                    id="title" 
-                    autocomplete="off"
-                    @input="picture.title = $event.target.value"
-                >
+        <div class="form-container">
+            <form @submit.prevent="addPicture()">
+                <div class="control text-center">
+                    <label for="title">Titulo</label>
+                    <input 
+                        id="title" 
+                        autocomplete="off"
+                        v-model.lazy="picture.titulo"
+                    >
+                </div>
+                <div class="control text-center">
+                    <label for="url">URL</label>
+                    <input 
+                        id="url" 
+                        autocomplete="off"
+                        v-model.lazy="picture.url"
+                    >
+                </div>
+                <div class="control text-center">
+                    <label for="description">Descrição</label>
+                    <textarea 
+                        id="description" 
+                        autocomplete="off"
+                        v-model="picture.descricao"
+                    ></textarea>
+                </div>
+                <div class="text-center">
+                    <Button name='Adicionar' type="submit" btnStyle="primary"/>
+                    <router-link to='/'>
+                        <Button name='Voltar' type="button"/>
+                    </router-link>
+                </div>
+            </form>
+            <div class="img-preview text-center">
+                <p><strong>Preview</strong></p>
+                <ResponsiveImg v-show="picture.url" :url="picture.url" :title="picture.title"/>
             </div>
-            <div class="control text-center">
-                <label for="url">URL</label>
-                <input 
-                    id="url" 
-                    autocomplete="off"
-                    @input="picture.url = $event.target.value"
-                >
-                <ResponsiveImg/>
-            </div>
-            <div class="control text-center">
-                <label for="description">Descrição</label>
-                <textarea 
-                    id="description" 
-                    autocomplete="off"
-                    @input="picture.description = $event.target.value"
-                ></textarea>
-            </div>
-            <div class="text-center">
-                <Button name='Adicionar' type="submit" btnStyle="primary"/>
-                <router-link to='/'>
-                    <Button name='Voltar' type="button"/>
-                </router-link>
-            </div>
-        </form>
+        </div>
     </div>
 </template>
 
 <script>
 import ResponsiveImg from '../components/ResponsiveImg.vue'
 import Button from "../components/Button";
+import Picture from "../domain/picture/picture"
 export default {
     components: { 
         ResponsiveImg,
@@ -48,16 +54,14 @@ export default {
     },
     data () {
         return {
-            picture: {
-                title: "",
-                url: "",
-                description: ""
-            }
+            picture: new Picture()
         }
     },
     methods: {
         addPicture () {
             console.log(this.picture)
+            this.$http.post("/v1/fotos", this.picture)
+                .then(() => this.picture = new Picture(), err => console.log(err))
         }
     }
 
@@ -84,5 +88,22 @@ export default {
         @media (max-width:600px) {
             width: 80vw;
         }
+    }
+    .img-preview {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 25vw;
+        border: 4px solid black;
+        img {
+            max-width: 200px;
+        }
+    }
+    .form-container {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+
     }
 </style>
