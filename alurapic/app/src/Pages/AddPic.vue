@@ -60,7 +60,7 @@ export default {
     methods: {
         addPicture () {
             console.log(this.picture)
-            this.$http.post("/v1/fotos", this.picture)
+            this.$http.post("http://localhost:3000/v1/fotos", this.picture)
                 .then(() => this.picture = new Picture(), err => console.log(err))
         }
     }

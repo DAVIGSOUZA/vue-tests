@@ -42,7 +42,7 @@ export default {
     }
   },
   created() {
-    this.$http.get('/v1/fotos')
+    this.$http.get(`http://localhost:3000/v1/fotos/`)
       .then(res => res.json())
       .then(fotos => this.fotos = fotos, err => console.log(err))
   },
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     remove(picture) {
-      this.$http.delete(`/v1/fotos/${picture._id}`)
+      this.$http.delete(`http://localhost:3000/v1/fotos/${picture._id}`)
         .then(() => {
           let i = this.fotos.indexOf(picture)
           this.fotos.splice(i, 1)
