@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1 class="text-center">Adicionar Fotos</h1>
-        <h2 class="text-center">Cadastro</h2>
+        <h1 class="text-center">Cadastro</h1>
+        <h2 v-if="id" class="text-center">Alterar Foto</h2>
+        <h2 v-else class="text-center">Adicionar Foto</h2>
         <div class="form-container">
             <form @submit.prevent="addPicture()">
                 <div class="control text-center">
@@ -30,7 +31,7 @@
                 </div>
                 <div class="text-center">
                     <Button name='Adicionar' type="submit" btnStyle="primary"/>
-                    <router-link to='/'>
+                    <router-link :to="{name: 'home'}">
                         <Button name='Voltar' type="button"/>
                     </router-link>
                 </div>
@@ -54,14 +55,37 @@ export default {
     },
     data () {
         return {
-            picture: new Picture()
+            picture: new Picture(),
+            id: this.$route.params.id
+        }
+    },
+    created () {
+        if(this.id) {
+            this.$http.get(`http://localhost:3000/v1/fotos/${this.id}`)
+                .then(res => res.json())
+                .then(foto => this.picture = foto, err => console.log(err))
         }
     },
     methods: {
         addPicture () {
-            console.log(this.picture)
-            this.$http.post("http://localhost:3000/v1/fotos", this.picture)
-                .then(() => this.picture = new Picture(), err => console.log(err))
+            if ((this.picture.titulo !== '' ) && (this.picture.url !== '')) {
+                if (this.id) {
+                    this.$http.put(`http://localhost:3000/v1/fotos/${this.id}`, this.picture)
+                        .then(() => {
+                            this.picture = new Picture(), err => console.log(err)
+                            this.$router.push({ name: 'home' })
+                        })
+    
+                } else {
+                    this.$http.post("http://localhost:3000/v1/fotos", this.picture)
+                        .then(() =>{ 
+                            this.picture = new Picture(), err => console.log(err)
+                            this.$router.push({ name: 'home' })
+                        })
+                }
+            } else {
+                alert('Os campos Título e URL são obrigatórios')
+            }
         }
     }
 

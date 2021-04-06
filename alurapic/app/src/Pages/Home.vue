@@ -3,13 +3,19 @@
     <h1 class="app-title">{{title}}</h1>
     <input type="search" class="filter" @input="filter = $event.target.value" placeholder="pesquisar">
     <ul class="list">
-      <li class="list-item" v-for="foto in filterPics" :key="foto.id">
+      <li class="list-item" v-for="foto in filterPics" :key="foto._id">
         <Card :title="foto.titulo">
           <ResponsiveImg 
             v-transform:scale.animate='1.2' 
             :url="foto.url" 
             :title="foto.titulo"
           />
+          <router-link :to="{name: 'alterar', params: {id: foto._id}}">
+            <Button 
+              type="button"
+              name="Alterar"
+            />
+          </router-link>
           <Button 
             type="button" 
             name="x" 

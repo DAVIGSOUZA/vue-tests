@@ -3,13 +3,26 @@ import AddPic from "./Pages/AddPic.vue";
 
 export const routes = [
     {
-        path: '/',
+        path: '/home',
         component: Home,
-        name: 'Home'
+        name: 'home',
+        menu: true
     },
     {
         path: '/cadastro',
         component: AddPic,
-        name: 'Cadastro'
+        name: 'cadastro',
+        menu: true
+    },
+    {
+        path: '/cadastro/:id',
+        component: AddPic,
+        name: 'alterar',
+        menu: false
+    },
+    {
+        path: '*',
+        component: Home,
+        menu: false
     }
 ]
