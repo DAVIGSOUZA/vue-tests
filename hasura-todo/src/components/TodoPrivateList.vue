@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div v-if="$apollo.queries.todos.Loanding">Loanding...</div>
-    <div v-if="error"> {{error}}</div>
     <div class="todoListwrapper">
       <TodoItem 
         v-bind:todos="filteredTodos" 
@@ -21,19 +19,6 @@
 <script>
 import TodoItem from "../components/TodoItem";
 import TodoFilters from "../components/TodoFilters";
-import gql from 'graphql-tag';
-
-export const GET_MY_TODOS = gql`
-  query getMyTodos {
-    todos(where: { is_public: { _eq: false} }, order_by: { created_at: desc }) {
-      id
-      title
-      created_at
-      is_completed
-    }
-  }
-`;
-
 export default {
   components: {
     TodoItem, TodoFilters
@@ -42,8 +27,20 @@ export default {
     return {
       type: "private",
       filterType: "all",
-      todos: [],
-      error: null
+      todos: [
+        {
+          id: "1",
+          title: "This is private todo 1",
+          is_completed: true,
+          is_public: false
+        },
+        {
+          id: "2",
+          title: "This is private todo 2",
+          is_completed: false,
+          is_public: false
+        }
+      ],
     }
   },
   computed: {
@@ -78,14 +75,5 @@ export default {
       }
     }
   },
-  apollo: {
-    todos: {
-      //graphql query
-      query: GET_MY_TODOS,
-      error(error) {
-        this.error = JSON.stringify(error.message)
-      }
-    }
-  }
 }
 </script>
