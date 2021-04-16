@@ -6,16 +6,11 @@
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "./components/NavBar";
 
 export default {
   components: {
     NavBar
-  },
-    computed: {
-    isLogged () {
-      return Boolean(localStorage.getItem('token'))
-    }
   }
 }
 </script>

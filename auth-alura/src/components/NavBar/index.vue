@@ -5,23 +5,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <router-link class="nav-link" to="/login">Login</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/cadastro" class="nav-link">
-              Criar conta
-            </router-link>
-          </li>
-        </ul>
+        <LoggedOutOptions v-if="!isLogged"/>
+        <LoggedInOptions v-else/>
       </div>
     </nav>
 </template>
 
 <script>
-export default {
+import LoggedInOptions from "./LoggedInOptions";
+import LoggedOutOptions from "./LoggedOutOptions";
 
+export default {
+  components: {
+    LoggedInOptions,
+    LoggedOutOptions
+  },
+  computed: {
+    isLogged () {
+      return Boolean(this.$store.state.token)
+    }
+  }
 }
 </script>
 
