@@ -14,6 +14,7 @@
 <script>
 import LoggedInOptions from "./LoggedInOptions";
 import LoggedOutOptions from "./LoggedOutOptions";
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -21,9 +22,7 @@ export default {
     LoggedOutOptions
   },
   computed: {
-    isLogged () {
-      return Boolean(this.$store.state.token)
-    }
+    ...mapGetters(['isLogged'])
   }
 }
 </script>

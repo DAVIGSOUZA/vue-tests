@@ -10,6 +10,7 @@
                 <label for="senha"> Senha </label>
                 <input type="password" class="form-control" v-model="usuario.senha">
             </div>
+            <p class="alert alert-danger" v-if="errorMsg">{{ errorMsg }}</p>
             <button class="btn btn-primary brn-block" type="submit">Login</button>
             <router-link class="ml-2" :to="{name: 'cadastro'}">
                 Fazer novo cadastro
@@ -26,13 +27,25 @@ export default {
             usuario: {
                 email: '',
                 senha: ''
-            }
+            },
+            errorMsg: ''
+
         }
     },
     methods: {
         login () {
             this.$store.dispatch('login', this.usuario)
-                .then(() => this.$router.push({name: 'gerentes'}))
+                .then(() => {
+                    this.$router.push({name: 'gerentes'})
+                    this.errorMsg = ''
+                })
+                .catch(err => {
+                    if (err.request.status === 401) {
+                        this.errorMsg = 'Login ou senha inválido(s)'
+                    } else {
+                        this.errorMsg = `Erro ${err}`
+                    }
+                })
         }
     }
 }
