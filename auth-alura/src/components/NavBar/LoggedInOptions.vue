@@ -13,14 +13,10 @@
 </template>
 
 <script>
+import { logoutMixin } from "@/mixins.js";
 export default {
   name: 'LoggedInOptions',
-  methods: {
-    logout () {
-      this.$store.commit('LOGOUT_USER')
-      this.$router.push({ name: 'login' })
-    }
-  }
+  mixins: [logoutMixin]
 }
 </script>
 
