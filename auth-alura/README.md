@@ -1,24 +1,7 @@
-# projeto
+# auth-alura
+Projeto realizado atraves do curso "Vue.js: Protegendo recursos com autenticação e VueX" da alura.
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Para rodar o projeto
+1. Clonar este [repositório](https://github.com/DAVIGSOUZA/fake-rest-api) e seguir as instruções do README 
+2. no terminal: `npm install`
+3. no terminal: `npm run serve`
