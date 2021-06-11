@@ -43,4 +43,4 @@ Não possui deploy, é necessário clonar o repositório do app e da api para ro
 [Tutorial da hasura](https://hasura.io/learn/graphql/vue/introduction/) para consumo de uma API GraphQL com o framework Vue.
 
 #### link do surge: 
-Não possui deploy, é necessário clonar o repositório do app e da api para rodar localmente o projeto.
+Não possui deploy, é necessário rodar localmente o projeto.
